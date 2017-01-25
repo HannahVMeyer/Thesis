@@ -1,0 +1,60 @@
+\section{Introduction}
+
+
+\subsection{Genome-wide association studies}
+\subsubsection{From genotype arrays to genome-wide SNP data}
+\begin{itemize}
+	\item Reference panel: HapMap, 1000Genomes, Uk10K
+	\item Phasing and Imputation
+\end{itemize}
+
+\subsubsection{From molecular to organismal phenotypes}
+\begin{itemize}
+	\item eQTLs, eWAS
+	\item intermediate phenotypes: organ level, brain
+	\item case-control studies
+\end{itemize}
+
+\subsubsection{Linear Mixed Models}
+\begin{itemize}
+	\item Basics: Linear models,...
+	\item Population structure, PCs, Kinship matrices
+	Pruning for LD structure to construct kinship matrices \citep{Eu-ahsunthornwattana2014}
+	Derivation of kinship matrix as \( ZZ^T/number of SNPs\) \citep{Speed2012}
+
+Under Hardy-Weinberg:
+allele frequencies: 
+\begin{equation}
+p + q =1
+\end{equation} 
+
+genotype frequencies: 
+\begin{equation}
+p^2 + 2pq + q^2 = 1
+\end{equation} 
+
+additive genotype encoding, allele dosages: 
+\(d(a_{alt},a_{alt}) = 0\) 
+\(d(a_{alt},a_{ref}) = 1\) 
+\(d(a_{ref},a_{ref}) = 2\) 
+
+Expected genotype per SNP: 
+\begin{equation}
+E(x) =  d(a_{alt},a_{alt}) \times p^2 + d(a_{alt},a_{ref}) \times 2pq + d(a_{ref},a_{ref}) \times  q^2)
+E(x) = 2pq + 2q^2 = 2(1-q)q + 2q^2 = 2q 
+\end{equation}
+
+Variance and standard deviation of genoytpe per SNP: 
+\begin{equation}
+Var(x) = E(x^2) - E(x)^2 = d(a_{alt},a_{alt})^2 \times  p^2 + d(a_{alt},a_{ref})^2  \times 2pq + d(a_{ref},a_{ref})^2  \times q^2 - (2q)^2 =  2q(1-q)
+\end{equation}
+
+\begin{equation}
+\sigma(x) = \sqrt(Var(x)) = \sqrt(2q(1-q))
+\end{equation}
+
+standardised genotypes:
+\(x_{SNP} = \frac{x_{SNP}-2q_{SNP}}{\sqrt{2q_{SNP}(1-q_{SNP})}}\)
+\end{itemize}
+
+\subsection{Imaging genetics}

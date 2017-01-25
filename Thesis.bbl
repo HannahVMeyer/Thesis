@@ -1,0 +1,84 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Abecasis \emph{et~al.}(2012)Abecasis, Auton, Brooks, DePristo,
+  Durbin, Handsaker, Kang, Marth \& McVean}]{Abecasis2012}
+Abecasis, G.R., Auton, A., Brooks, L.D., DePristo, M.A., Durbin, R.M.,
+  Handsaker, R.E., Kang, H.M., Marth, G.T. \& McVean, G.A. (2012) {An
+  integrated map of genetic variation from 1,092 human genomes.}
+\newblock \emph{Nature}, 491(7422):56--65.
+\newblock \doi{10.1038/nature11632}
+
+\bibitem[{Anderson \emph{et~al.}(2010)Anderson, Pettersson, Clarke, Cardon,
+  Morris \& Zondervan}]{Anderson2010}
+Anderson, C.A., Pettersson, F.H., Clarke, G.M., Cardon, L.R., Morris, A.P. \&
+  Zondervan, K.T. (2010) {Data quality control in genetic case-control
+  association studies.}
+\newblock \emph{Nature protocols}, 5(9):1564--73.
+\newblock \doi{10.1038/nprot.2010.116}
+
+\bibitem[{Delaneau \emph{et~al.}(2012)Delaneau, Marchini \&
+  Zagury}]{Delaneau2012}
+Delaneau, O., Marchini, J. \& Zagury, J.F. (2012) {A linear complexity phasing
+  method for thousands of genomes.}
+\newblock \emph{Nature methods}, 9(2):179--81.
+\newblock \doi{10.1038/nmeth.1785}
+
+\bibitem[{Delaneau \emph{et~al.}(2013)Delaneau, Zagury \&
+  Marchini}]{Delaneau2013}
+Delaneau, O., Zagury, J.F. \& Marchini, J. (2013) {Improved whole-chromosome
+  phasing for disease and population genetic studies.}
+\newblock \emph{Nature methods}, 10(1):5--6.
+\newblock \doi{10.1038/nmeth.2307}
+
+\bibitem[{Howie \emph{et~al.}(2011)Howie, Marchini \& Stephens}]{Howie2011}
+Howie, B., Marchini, J. \& Stephens, M. (2011) {Genotype imputation with
+  thousands of genomes.}
+\newblock \emph{G3 (Bethesda, Md.)}, 1(6):457--70.
+\newblock \doi{10.1534/g3.111.001198}
+
+\bibitem[{Howie \emph{et~al.}(2009)Howie, Donnelly \& Marchini}]{Howie2009}
+Howie, B.N., Donnelly, P. \& Marchini, J. (2009) {A flexible and accurate
+  genotype imputation method for the next generation of genome-wide association
+  studies.}
+\newblock \emph{PLoS genetics}, 5(6):e1000529.
+\newblock \doi{10.1371/journal.pgen.1000529}
+
+\bibitem[{Marchini \emph{et~al.}(2007)Marchini, Howie, Myers, McVean \&
+  Donnelly}]{Marchini2007}
+Marchini, J., Howie, B., Myers, S., McVean, G. \& Donnelly, P. (2007) {A new
+  multipoint method for genome-wide association studies by imputation of
+  genotypes.}
+\newblock \emph{Nature genetics}, 39(7):906--13.
+\newblock \doi{10.1038/ng2088}
+
+\bibitem[{Speed \emph{et~al.}(2012)Speed, Hemani, Johnson \&
+  Balding}]{Speed2012}
+Speed, D., Hemani, G., Johnson, M.R. \& Balding, D.J. (2012) {Improved
+  heritability estimation from genome-wide SNPs.}
+\newblock \emph{American journal of human genetics}, 91(6):1011--21.
+\newblock \doi{10.1016/j.ajhg.2012.10.010}
+
+\bibitem[{Teo \emph{et~al.}(2007)Teo, Inouye, Small, Gwilliam, Deloukas,
+  Kwiatkowski \& Clark}]{Teo2007}
+Teo, Y.Y., Inouye, M., Small, K.S., Gwilliam, R., Deloukas, P., Kwiatkowski,
+  D.P. \& Clark, T.G. (2007) {A genotype calling algorithm for the Illumina
+  BeadArray platform.}
+\newblock \emph{Bioinformatics (Oxford, England)}, 23(20):2741--6.
+\newblock \doi{10.1093/bioinformatics/btm443}
+
+\bibitem[{{The International HapMap Consortium}(2005)}]{HapMap2005}
+{The International HapMap Consortium} (2005) {A haplotype map of the human
+  genome.}
+\newblock \emph{Nature}, 437(7063):1299--320.
+\newblock \doi{10.1038/nature04226}
+
+\bibitem[{{UK10K Consortium}(2014)}]{UK10KConsortium2014}
+{UK10K Consortium} (2014) {UK10K Project}.
+\newblock \emph{http://www.uk10k.org}
+
+\end{thebibliography}
