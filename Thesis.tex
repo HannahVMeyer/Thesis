@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt, twoside]{article}
+\documentclass[a4paper,12pt, twoside]{report}
 %layout packages
 \usepackage{geometry} %Page layout
 \geometry{a4paper, top=25mm, left=25mm, right=25mm, bottom=25mm,
@@ -11,6 +11,7 @@
 \usepackage{textcomp} %Celsius symbol, euro sign
 \usepackage{amsmath} %formula
 \usepackage{mathtools} %formula
+\usepackage{bm}
 \usepackage{url}
 \usepackage{xfrac}
 %\usepackage{showkeys} %zeigt keys der Bilder an, vor Endversion auskommentieren
@@ -73,14 +74,23 @@
 \usepackage{natbib}
 \bibpunct{[}{]}{,}{a}{}{,}
 
+% Packages included by Hannah
+\usepackage{color}
+\newcommand{\red}{\textcolor{red}}
+\include{mathcommands}
+
 \begin{document}
 % Introduction
-%\include{Introduction}
+%\include{Introduction/Introduction}
+\tableofcontents
+%\listoffigures
+%\listoftables
 
 % Chapter 1
 %\include{Chapter1/introduction}
-%\include{Chapter1/simulation}
-\include{Chapter1/LMMyeast}
+\include{Chapter1/simulation}
+%\include{Chapter1/LMMyeast}
+
 %\include{Chapter1/conclusion}
 
 
