@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.dvi
+*.bbl
+*.blg
+*.pdf
+*.toc
+*.nlo
+*.synctex.gz
+
+Introduction/Figures
+Chapter1/Figures/
+Chapter2/Figures/
+Chapter3/Figures/
+Supplement/Figures/
