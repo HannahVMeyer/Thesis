@@ -1,0 +1,64 @@
+\newpage
+\section{Multi-trait GWAS}
+In order to show the utility of LiMMBo for joint high-dimensional phenotype analyses and demonstrate the advantages over single trait approaches, I analysed the imputed dataset both with single-trait and multi-trait GWAS.  
+
+\subsection{LiMMBo increases power in detecting genetic associations}
+For both analyses, I used a LMM where the sample-by-sample component of the random genetic effect is based on the genetic relationship matrix. To obtain an estimate of the genetic relationship matrix, I first pruned the genome-wide SNPs (11,623) for SNPs that are in LD with \(r^2 > 0.2\) within a window of 3kb. As the dataset is based on an F2 cross, LD structure estimation is not straight-forward and this window size is a simple estimate derived from a study on the population genomics of domestic and wild yeasts \citep{Liti2009}. The LD pruning reduced the SNP set for GRM estimation to 4,105 SNPs. The GRM was estimated via plink \cite{Chang2015}, which follows the method introcuded by Yang and colleagues \citep{Yang2011}. 
+
+The first step in the mtGWAS is the trait-by-trait covariance estimation via LiMMBo. After xx bootstraps of ten traits each, every trait-trait combination was sampled and its covariance estimated at least three times. Together with the subsequent combination of the bootstrapped covariance estimates, the runtime was xxx. The combined trait-trait covariance estimates \tmat{C_g} and \tmat{C_n} were then used as input estimates for the second step in the mtGWAS, the mvLMM  (Eq.~\ref{eq:mvLMM}) across all genome-wide SNPs.  I used a mvLMM with a trait-design matrix corresponding to the any effect test, i.e. testing for an effect of the SNP on any of the traits compared to the null hypothesis of no association (\red{Section~\ref{sec:mvtests}}).
+
+For the stGWAS, the trait-by-trait components of the random effects will be point estimates (\(\sigma_g\) and \(sigma_n\)) derived within the LMM and do not require \textit{a priori} estimation. The stGWAS is based on a univariate LMM (Eq.~\ref{eq:uvLMM}) per SNP, where each trait is mapped individually. To account for the number of univariate tests, the pvalues obtained from the stGWAS were adjusted for multiple testing by the effective number of conducted tests \(M_{eff}\). \(M_{eff}\) was introduced by Galwey and colleagues \citeyear{Galwey2009} and adjusts for multiple testing in a manner similar to the Bonferroni method \citep{Dunn1961}. However, it is less conservative, as it does not adjust for total number of tests, but the estimated, effective number of tests, taking correlation between the 
+variables and tests into account:
+\begin{equation}
+ M_{eff} = \frac{(\sum^M_{i=1} \sqrt{\lambda_i})^2}{\sum^M_{i=1}\lambda_i},
+\end{equation}
+ where \(\lambda\) are the eigenvalues of the phenotypes' correlation matrix. To adjust for multiple testing in the stGWAS, the pvalues are multiplied with \(M_{eff}\) and set to 1 if the multiplication leads to values greater than one. \(M_{eff}\) for the 41 growth traits was estimated to be 33. 
+ 
+In order to assess the significance of the single-trait and multi-trait analyses, I followed approaches of previous association studies in yeast crosses \citep{Brem2002,Brem2005,Ehrenreich2010}, where permuations are used to estimate empirical significance levels. With a conservative, theoretical singificance threshold of \(p_\text{t}10^{-5}\) at most one SNP is expected to be false positive with a total of \(s = 11,623\) SNPs . To find the empircal FDR corresponding to this threshold, I generated \(p = 50\) permutations of the genotypes and fitted the LMM against these permutations. The pvalues obtained from these analyses were then combined and sorted in increasing order. The pvalue observed at position \(p_\text{t} \times s \times p\) is used as the empirical FDR. For the mtGWAS this threshold is at \(\text{FDR}_{\text{mtGWAS}} =1.2e-05\)  lower than for the stGWAS \(\text{FDR}_{\text{stGWAS}} =8.6e-06\).
+
+Fig.~\ref{fig:GWAS-yeast} shows the manhattan plot of the multi-trait and single-trait GWAS. On several chromsomomes, mtGWAS peaks (blue) are observed whereas no stGWAS peaks (orange; minimum p-value per SNP across all 41 stGWAS, adjusted for multiple testing) can be detected. This results demonstrates the increase in power on real data when jointly modeling the traits, confirming the results obtained from the theoretical power analysis (Section~\ref{sec:power}). 
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.9\textwidth]{Chapter2/Figures/manhattan.png}
+	\caption{\textbf{Manhattan plot of pvalues from stGWAS and mtGWAS.} The stGWAS pvalues were adjusted for multiple testing by the effective number of tests (\(M_{eff} = 33\) and only the minimum adjusted p-values across all 41 traits per SNP are shown. The significance line is drawn at the empirical \(\text{FDR}_{\text{stGWAS}} =8.6e-06\).}
+ 	\label{fig:GWAS-yeast}
+\end{figure}
+
+To quantify the increase in power, I counted the number of loci detected above the permutation-based significant thresholds for both the stGWAS and the mtGWAS. However for a fair comparison of the two methods, I also needed to account for linked loci, with the long LD structure present in the F2 cross potentially merging nearby signals. As for the estimation of the GRM, I used \textit{plink} for LD pruning of the SNPs, chosing a strict threshold of \(r^2 > 0.2\) and increasing LD window sizes ranging from 3 to 100kb.  The maximal LD window of 100kb covers between 6\% (chromosome 4) and 43\% (chromosome 1) of total chromosome length (yeast genome assembly: ScerevisaeR64-1-1 \red{\citep{}}). Table \ref{tab:sigsnps} shows that the increase in power is present from narrow to broad LD pruning, with on average 29\% more significant loci in mtGWAS.
+
+% Table generated by Excel2LaTeX from sheet 'LDGwasYeast'
+\begin{table}[htbp]
+  \centering
+  \caption{\textbf{Comparison of significant loci in stGWAS and mtGWAS.} In column `All SNPs', the absolute number of SNPs beyond the significance threshold for multitait and singletrait GWAS as well as their ratio (multitrait:singletrait) are depicted. In order to limit the potential bias in the counting of the loci, introduced by different degrees of linkage disequilibrium (LD) for different loci, the genome-wide SNPs were LD pruned and the ratio of significant SNPs determined for five different LD window sizes. The maximal LD window covering between 6\% (chromosome 4) and 43\% (chromosome 1) of total chromosome length.}
+    \begin{tabular}{lrrrrrr}
+    \toprule
+          & \multicolumn{1}{c}{All SNPs} & \multicolumn{5}{c}{LD pruned with $r^2 > 0.2$ } \\
+\cmidrule{3-7}          &       & 3kb   & 10kb  & 30kb  & 50kb  & 100kb \\
+    \midrule
+    NrSNPs & 11623 & 4105  & 1028  & 264   & 161   & 107 \\
+    multitrait & 1132  & 384   & 101   & 24    & 15    & 9 \\
+    singletrait & 695   & 275   & 72    & 20    & 13    & 7 \\
+    multitrait:singletrait & 1.63  & 1.4   & 1.4   & 1.2   & 1.15  & 1.29 \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:sigsnps}%
+\end{table}%
+
+\subsection{}
+As well as providing an increase in power, the mtGWAS inherently provides effect size estimates across all phenotypes for a particular locus, allowing a richer exploration of the underlying biology. 
+To analyse the relationship between traits and SNPs based on their effect size estimates, I filtered the genome-wide SNPs for SNPs that fell within a gene body (yeast genome assembly: ScerevisaeR64-1-1).  I pruned these 8,135 SNPs for SNPs in LD  with \(r^2 > 0.2\) and within a 3kb window (1,412 SNPs). Lastly, I filtered for SNPs passing the \(\text{FDR}_\text{mtGWAS} =1.2e-05\) yielding 210 SNPs across 15 out of the 16 yeast chromosomes. Chromsome V is the only chromosome without significantly associated SNPs for the mtGWAS (Figure~\ref{fig:GWAS-yeast}). 
+
+To find groups of SNPs and traits with similar effect size estimates, I clustered the effect size estimates of these SNPs both across traits and SNPs. I used the hierarchical clustering algorithm \textit{pvclust} that provides bootstrap-based p-values as a measure for the stability of a given cluster \cite{Suzuki2006}. The clustering was based on the Pearson correlation coefficients, with 50,000 bootstraps for traits and 10,000 for SNPs. Clusters with \(p < 0.05\) were considered significant. A heatmap effect size estimates and the clustering results is depicted in Figure~\ref{fig:effectsizes}. Ignoring the clustering for a first impression of the results, one can clearly see that most SNPs have significant non-zero effects in more than one trait. Furthermore some traits have contributions from across the genome, many of which are xenobiotic growth conditions e.g. zeocin \cite{Krol2015} and neomycin \cite{Alamgir2010}. Turning the attention to the clustering,  Figure~\ref{fig:effectsizes} shows that the clusters are driven by specific combinations of loci and traits, and would be hard to achieve from a single trait analysis. 
+
+There are a number of significant clusters for traits (Figure~\ref{fig:effectsizes}, coloured row dendrogram), including classically linked carbon metabolism sources (lactose, lactate and ethanol), and other clusters which there is literature support for. For example, I found a study showing gene expression changes for genes involved in DNA replication upon treatment with hydroxyurea and 4-nitroquinoline-l-oxide (x4NQO) \cite{Elledge1990}, two substances that form stable cluster. Supporting the cluster of trehalose and sorbitol is a previous results, which demonstrated these sugars to have synergistic effects on viability in yeast \cite{Hua2015}. For other clusters, such as SDS and Hydroxybenzaldehyde or magnesium sulfate and berbamine I was unable to find literature support but this could be a candidate clustering of these growth phenotypes for further investigation. 
+
+For the clustering across SNPs, I discovered 31 stable clusters (Figure~\ref{fig:effectsizes}, coloured column dendrogram), many of which represent linked loci. However, there are nine clusters (Figure~\ref{fig:effectsizes}B, grey boxes) spanning multiple chromosomes, and many clusters with disjoint regions across a chromosome. Some SNP clusters have suggestive common annotation, such as c\textit{cluster a} which has two members of the nuclear pore complex, and \textit{cluster b} which has a common set of vesicle associated genes (Fig.~\ref{fig:GWAS-yeast}B, labeled boxes). The small size of clusters inhibited any systematic gene ontology based enrichment, but the ability to explore both multiple traits and multiple loci from the mtGWAS provides stimulating hypothesis generation. 
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[trim = 0mm 150mm 0mm 0mm, clip, width=0.9\textwidth]{Chapter2/Figures/effectsizes.png}
+	\caption{\textbf{mtGWAS effects size estimates.} Effect size estimates of LD-pruned (3kb window, \(r^2 > 0.2\)), significant SNPs located within a gene were clustered by loci and traits (both hierarchical, average-linkage clustering of Pearson correlation coefficients ). Stable clusters (pvclust \( p < 0.05\)) are marked in orange. Grey boxes indicate stable SNP clusters spread across at least two chromosomes. a and b label two clusters for which suggestive common annotation was found, for details see test.}
+ 	\label{fig:GWAS-yeast}
+\end{figure}
+
