@@ -1,0 +1,19 @@
+\documentclass{thesis}
+\begin{document}
+\noindent\textbf{Title: Genetic association of high-dimensional traits}
+\\
+\textbf{Author: Hannah Verena Meyer}
+\begin{singlespace}
+Over the past ten years, more than \num{4000} genome-wide association studies (GWAS) have helped to shed light on the genetic architecture of complex traits and diseases.   In recent years, phenotyping of the samples often goes beyond a single trait and multi- to high-dimensional phenotypes are recorded for each individual. While the generation of these rich datasets offers the potential to analyse complex trait structures and pleiotropic effects on a genome-wide level, novel challenges in the analyses of these genotype-phenotype associations arise. This thesis summarises my research in genetic assocations for high-dimensional phenotype data.
+
+First, I developed a novel computationally efficient approach for the multi-variate analyses of high-dimensional phenotypes based on linear mixed models combined with bootstrapping (LiMMBo). Both in simulations studies and on real data, I demonstrate the statistical validity of LiMMBo and show that it scales to hundreds of phenotypes. I show the gain in power of multi-variate analysis for high-dimensional phenotypes compared to univariate approaches and illustrate that LiMMBo allows for detecting pleiotropy in a large number of phenotypic traits. 
+
+Aside from the computational challenges in genotype-phenotype associations, with very high-dimensional phenotypes, the `true' dimension often is unknown and lies hidden in the high-dimensional space. Retaining maximum power for association studies of such phenotype data relies on using an appropriate phenotype representation.  In simulations, I systematically analysed twelve unsupervised dimensionality reduction methods for their performance in finding a trustworthy phenotype representation depending on data structure and size. I propose a stability criteria for the choice of low-dimensional phenotype representation and demonstrate that stable phenotypes can recover genetic associations. 
+
+Finally, I analysed genetic variants for associations to high-dimensional cardiac phenotypes based on MRI data from \num{1500} healthy individuals. Guided by the results of the simulation, I used an unsupervised approach to extract a low-dimensional representation of cardiac wall thickness and conducted a GWAS on this representation. In addition, I investigated genetic associations to a trabeculation phenotype generated from a supervised feature extraction approach on the cardiac MRI data.
+
+In summary, this thesis highlights and overcomes some of the challenges in performing genetic association study for high-dimensional phenotypes. It describes new approaches for phenotype processing and genotype to phenotype mapping of high-dimensional datasets and provides new insights in the genetic structure of cardiac morpholgy in humans.
+
+
+\end{singlespace}
+\end{document}
