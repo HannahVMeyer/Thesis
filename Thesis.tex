@@ -1,107 +1,48 @@
-\documentclass[a4paper,12pt, twoside]{report}
-%layout packages
-\usepackage{geometry} %Page layout
-\geometry{a4paper, top=25mm, left=25mm, right=25mm, bottom=25mm,
-         headsep=10mm, footskip=12mm}
-\usepackage{lscape}
-\usepackage{setspace} %linespacings
-\onehalfspacing
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{textcomp} %Celsius symbol, euro sign
-\usepackage{amsmath} %formula
-\usepackage{mathtools} %formula
-\usepackage{bm}
-\usepackage{url}
-\usepackage{xfrac}
-%\usepackage{showkeys} %zeigt keys der Bilder an, vor Endversion auskommentieren
-\usepackage{listings} % f\"{u}r source code formatting
-	\lstset{language=R,
-		basicstyle=\footnotesize
-		}
-%\usepackage[toc,page]{Appendix}
-\usepackage{verbatim} % enables to 'comment' entire paragraphs
-
-% enables to run makeindex used for package{nomencl} from within latex document
-\def\execute{%
-\begingroup
-\catcode`\%=12
-\catcode`\\=12
-\executeaux}
-\def\executeaux#1{\immediate\write18{#1}\endgroup}
-\usepackage[intoc]{nomencl}
-%\execute{makeindex Masterarbeit.nlo -s nomencl.ist -o Masterarbeit.nls}
-\renewcommand{\nomname}{Abbreviations} 	% changes name nomenclature to abbreviations
-\setlength{\nomitemsep}{-\parsep}
-\setlength{\nomlabelwidth}{.20\hsize}
-\makenomenclature
-
-%Figure packages
-\usepackage{wrapfig} %erm\"{o}glicht, text um bilder flie\\ßen zu lassen
-%\usepackage{subfig}
-\usepackage{rotating} %damit bildunterschrift auch gedreht werden kann
-\usepackage{graphicx} 
-\usepackage{caption} 
-\usepackage{subcaption}
-
-%tabular packages
-\usepackage{multirow}
-%\usepackage{longTable}
-\usepackage{array}
-\usepackage{booktabs} %nice looking Tables
-\usepackage[labelformat=simple, labelsep=colon, justification=justified, labelfont=bf, textfont=normalfont, font=small]{caption}
-\captionsetup[lstlisting]{font=singlespacing} 
-
-%new Table column types
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}#1}		%rechtsb\"{u}ndig
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}#1}		%linksb\"{u}ndig
-\newcolumntype{C}[1]{>{\centering\arraybackslash}#1}		%zentriertO
-
-
-% other new commands
-\newcommand{\HRule}{\rule{\textwidth}{0.5mm}}
-\newcommand{\up}[1]{\ensuremath{^{\textrm{\tiny#1}}}}	% hochstellen im flie\\ßtext
-\newcommand{\down}[1]{\ensuremath{_{\textrm{\tiny#1}}}}	% tiefstellen im flie\\ßtext
-\newcommand{\beginsupplement}{%
-        \setcounter{table}{0}
-        \renewcommand{\thetable}{S\arabic{table}}%
-        \setcounter{figure}{0}
-        \renewcommand{\thefigure}{S\arabic{figure}}%
-     }
-
-% bib packages
-\ProvidesFile{merlin.mbs}[2011/03/28 4.32 (PWD, AO, DPC)]
-\usepackage{natbib}
-\bibpunct{[}{]}{,}{a}{}{,}
-
-% Packages included by Hannah
-\usepackage{color}
-\newcommand{\red}{\textcolor{red}}
-\include{mathcommands}
+\documentclass{thesis}
+\input{mathcommands}
 
 \begin{document}
+
+\hyphenation{
+cross-va-li-da-tion
+}
+%\input{frontpage}
+%\input{Declaration}
 % Introduction
-%\include{Introduction/Introduction}
 \tableofcontents
 %\listoffigures
 %\listoftables
 
-\input{Chapter1/Intro}
-\input{Chapter1/simulation}
-\input{Chapter1/LiMMBo}
-%\input{Chapter1/Conclusion}
+\input{Chapter5/Intro}
+\input{Chapter5/Data}
+
+%\bibliography{myLibrary2}
+%\bibliographystyle{ebi}
+
+%\beginsupplement
+%\include{Supplement}
+\end{document}
+
+
+\input{Summary}
+
+\input{Introduction/Introduction}
+
+\input{Chapter1/PhenotypeSimulator}
 
 \input{Chapter2/Intro}
-\input{Chapter2/Data}
-\input{Chapter2/GWAS}
-%\input{Chapter2/Conclusion}
+\input{Chapter2/LiMMBo}
+\input{Chapter2/conclusion}
+
+\input{Chapter3/Intro}
+\input{Chapter3/Data}
+\input{Chapter3/GWAS}
+
+\input{Chapter4/Intro}
+\input{Chapter4/Visualisation}
+\input{Chapter4/FeatureExtraction}
 
 
-\bibliography{myLibrary2}
-\bibliographystyle{ebi}
 
-\beginsupplement
-\include{Supplement}
-\end{document}
 
 
