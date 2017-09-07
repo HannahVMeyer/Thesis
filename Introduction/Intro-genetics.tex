@@ -1,0 +1,214 @@
+\chapter{Introduction}
+
+The field of quantitative genetics has come far since Fisher's initial studies on growth traits in wheat in 1918 \citep{}. While back then the concept of inheritance existed, little was known about the molecule responsible.  The discovery of the DNA structure by Franklin, Watson and Crick and technical break-throughs in analysing its sequence some 20 years later, have allowed to investigate genetic variance on a much more detailed scale, moving from whole chromosomes and linkage studies to the analysis of DNA variation on a single-base pair level. 
+
+The developments in genotyping and sequencing technologies in the recent years have made large scale studies on genetic variation feasible. With the sinking costs of genotyping techniques, the number of samples investigated has risen and studies investigating the effects of single DNA bases often comprise thousands of individuals, especially in the field of human genetics.  Together with the increased number of samples available in these studies, the number of phenotypes that are measured for each individual has grown from a few measurements to tens or even hundreds. The availability of these rich datasets provides great opportunities when studying the influence of genetic variation on phenotypic variance, such as studying pleiotropy and complex trait structure. However, it also poses technical challenges in analysing these dataset. 
+
+\section{From genetic linkage analysis to genome-wide association studies}
+The formulation of the concept of human inheritance - the passing on of traits from parents to offspring can already be found in works by ancient greek philosophers. While Aristotle proposed the inheritance of acquired traits in `Generation of animals', Hippocrates and Democritus describe a possible meachanism of inheritance \citep{Zirkle1935}, a concept later formalised as `pangenesis' by Darwin \citep{Darwin1868} and others such as Buffon \citep{Buffon1749} and Bonnet \citep{Bonnet1781}. The theroy of pangenesis -- which translates to whole (greek: pan) origin (greek: genesis) or birth (greek: genos) -- describes how the entire parental orginsms participates in passing on traits to the offspring. 
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=\textwidth]{Introduction/Figures/TimelineQuantGenetics.pdf}
+	\caption[\textbf{Quantitative genetics over time. }]{\textbf{Quantitative genetics over time. }} 
+	 	\label{fig:timeline-genetics}
+\end{figure}
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=\textwidth]{Introduction/Figures/GenotypePhenotype.pdf}
+	\caption[\textbf{Genotype-phenotype mapping approaches. }]{\textbf{Genotype-phenotype mapping approaches. }} 
+	 	\label{fig:genotype-phenotype}
+\end{figure}
+
+
+
+\section{A linear model for finding genotype-phenotype associations}
+
+In genotype to phenotype mapping, the most simple linear model (LM) describes the linear relationship between a phenotype \(y\) and a genetic marker \(x\). Optionally, known covariates \(F\) can be included as explanatory variables. There are a variety of different types of models, depending on the structure of background effects and the number of phenotypes that are modeled simultaneously. In the following, a short description of the models relevant for this project is outlined. 
+
+\label{sec:ssection:lm}
+\paragraph{Uni-variate linear models for genetic analyses}
+The uni-variate LM models a single phenotype \(y\) as the sum of a fixed effect of the genetic marker \(x\) and \(K\) known covariates \(F\) and residual noise \(\psi\) across \(N\) samples:
+
+\begin{equation}
+\mat{y} = \mat{F}\mat{\alpha} + \mat{x}mat{\beta} + \mat{\psi},\text{ }
+\mat{\psi} \sim \normal 0 {\sigma_e^2\matsub{I}{N}}.
+\label{eq:lm-uv}
+\end{equation}
+
+with
+\begin{align*} 
+& \text{the phenotype vector } \mat{y} \inR N 1,\\
+& \text{the matrix of $K$ covariates }\mat{F} \inR N K,\\
+& \text{the effect of covariates } \mat{\alpha} \inR K 1,\\
+& \text{the genetic profile of the SNP being tested }\mat{x} \inR N 1 \text{and}\\
+& \text{the effect size of the SNP } \mat{\beta} \inR x x \\
+\end{align*} 
+
+
+\noindent The association between phenotypes and the genetic markers can be assesed by testing the hypothesis that the genetic variant has an effect \(\beta \neq 0\) versus having no effect on the phenotype. The log likelihood ratio (LLR) test statistic \(\Lambda\) is a commonly used statistic to compare the likelihood of the full model \taltH (Equation~\ref{eq:lm-uv}) with \(\beta \neq 0\) to the one of the Null model \tnullH:
+\begin{equation}
+\nullH: \mat{y} =\mat{F}\mat{\alpha}  + \mat{\psi},\text{ }
+\mat{\psi}\sim \normal 0 {\sigma_e^2\matsub{I}{N}}
+\label{eq:lm_null}
+\end{equation}
+
+\noindent The LLR test statistic \(\Lambda\) is defined as
+\begin{equation}
+\Lambda  =  \mathcal{L} (\hat{\beta}, \hat{\alpha}, \hat{\sigma_{e}}) -  \mathcal{L} (0, \hat{\alpha}, \hat{\sigma_{e}})
+\label{eq:llr}
+\end{equation}
+
+\noindent where \(\mathcal{L} (\hat{\beta}, \hat{\alpha}, \hat{\sigma_{e}})\) are the maximum likelihood estimators (MLE) of  \taltH and \(\mathcal{L} (0, \hat{\alpha}, \hat{\sigma_{e}})\) the MLE of \tnullH. 
+
+\noindent \(2\Lambda\) follows a \(\chi^2_{df}\) distribution with \(df\) degrees of freedom \citep{Wilks1938} 
+\begin{equation}
+2\Lambda \sim \chi^2_{df} 
+\label{eq:lambda}
+\end{equation}
+
+\noindent and allows for the calculation of the P value as :
+\begin{equation}
+P(\Lambda) = 1 - F_{\chi^2}(2\Lambda, df)
+\label{eq:pvalue}
+\end{equation}
+
+\begin{figure}[hbtp]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=\textwidth]{Introduction/Figures/GWASstats.pdf}
+	\caption[\textbf{.}]{\textbf{.} } 
+	 	\label{fig:GWAs-stats}
+\end{figure}
+
+\section{Relatedness and population structure}
+
+Under Hardy-Weinberg:
+allele frequencies: 
+\begin{equation}
+p + q =1
+\end{equation} 
+
+genotype frequencies: 
+\begin{equation}
+p^2 + 2pq + q^2 = 1
+\end{equation} 
+
+additive genotype encoding, allele dosages: 
+\(d(a_{alt},a_{alt}) = 0\) 
+\(d(a_{alt},a_{ref}) = 1\) 
+\(d(a_{ref},a_{ref}) = 2\) 
+
+Expected genotype per SNP: 
+\begin{equation}
+E(x) =  d(a_{alt},a_{alt}) \times p^2 + d(a_{alt},a_{ref}) \times 2pq + d(a_{ref},a_{ref}) \times  q^2)
+E(x) = 2pq + 2q^2 = 2(1-q)q + 2q^2 = 2q 
+\end{equation}
+
+Variance and standard deviation of genotype per SNP: 
+\begin{equation}
+Var(x) = E(x^2) - E(x)^2 = d(a_{alt},a_{alt})^2 \times  p^2 + d(a_{alt},a_{ref})^2  \times 2pq + d(a_{ref},a_{ref})^2  \times q^2 - (2q)^2 =  2q(1-q)
+\end{equation}
+
+\begin{equation}
+\sigma(x) = \sqrt(Var(x)) = \sqrt(2q(1-q))
+\end{equation}
+
+standardised genotypes:
+\(x_{SNP} = \frac{x_{SNP}-2q_{SNP}}{\sqrt{2q_{SNP}(1-q_{SNP})}}\)
+
+\section{Extending the simple linear model: linear mixed models in genotype to phenotype mapping}
+\label{section:lmm}
+Linear mixed models (LMMs) include both fixed and random effects in the model. In genetics, LMMs can model both fixed genetics effects, i.e. single variants, and background genetic effects, i.e. controling for population structure and accounting for polygenic background \citep{Yu2006}. Population structure and relatedness between individuals can be captured in a genetic relatedness matrix, which accounts for the pairwise genetic similarity between individuals. The relatedness matrix is estimated as
+ \begin{equation}
+ R = \frac{1}{S}XX^T
+ \label{eq:relatedness}
+ \end{equation}
+ where \(S\) is the number of SNPs used for the estimation and \(X\) is the \(S \times N\) genotype matrix. As described for the linear model, there are uni-variate and multi-variate LMM set-ups for genetic association analyses. 
+
+The genetic background and residual noise are modeled as random effects with a scalar MLE for the genetic \(g\) and noise trait-variance \(\psi\),   \(\sigma_g^2\) and \(\sigma_e^2\):
+
+\begin{equation}
+\mat{y} =\mat{F}\mat{\alpha} +\mat{x}\beta +\mat{g}+\mat{\psi},\text{ }
+\mat{g} \sim \normal 0 {\sigma_g^2\mat{R}},\text{ }
+\mat{\psi} \sim\normal 0 {\sigma_e^2\mat{I}_N}
+\label{eq:lmm-uv}
+\end{equation}
+
+with
+\begin{align*} 
+& \text{the phenotype vector }\mat{y} \inR N 1,\\
+& \text{the matrix of $K$ covariates }\mat{F} \inR N K,\\
+& \text{the effect of covariates } \mat{\alpha} \inR K 1,\\
+& \text{the genetic profile of the SNP being tested }\mat{x} \inR N 1,\\
+& \text{the effect size of the SNP } \mat{\beta} \inR x x \text{ and}\\
+& \text{the sample relatedeness matrix }\mat{R} \inR N N,
+\end{align*} 
+
+
+\subsection{Multi-trait mapping}
+Many cohort studies today, ranging from studies in model organism such as yeast and arabidopsis thaliana to human, have rich, high dimensional datasets including molecular, morphological or imaging derived traits \citep{Bloom2013,Atwell2010,Astle2009,Shaffer2016,Stein2010}. However, these traits have often been analysed separately,  partly for simplicity and partly because of a paucity of models suitable for the anlaysis of high-dimensional phenotype data. A variety of multi-trait models have been developed which can be broadly grouped into three different classes: i) dimensionality reduction techniques, ii) meta-analysis approaches and iii) multivariate regression models (reviewed in \citep{Shriner2012,Yang2012}). 
+
+\paragraph{Dimensionality reduction techniques} Dimensionality reduction methods in genotype-phenotype mapping seek to find a linear combination of the phenotypes into a lower dimensional space. Two dimensionality reduction methods commonly used as a transformation for phenotypes are principal component analysis (PCA) and canonical correlation analyses (CCA). An overview of other methods and a more detailed description of methods in this section will be given in \cref{chapter:DimReduction}. 
+
+In PCA, the phenotype data is projected into its principal components - the eigenvectors of the empirical covariance matrix. Principal components reflect the internal structure of the data in terms of the phenotypic variance that they explain: the highest amount of phenotypic variance explained lies in the first component, the second highest variance in the second component and so forth. The amount of variance that each component explains is given by its corresponding eigenvalue. The dimensionality reduction is achieved by using all those principal components (in increasing order) until the cumulative sum of the eigenvalues reaches a predefined threshold of total phenotypic variance that should be retained. PCA as a dimensionality reduction technique has for instance been used in studies to find links between genotypes and facial features or obesity phenotypes \citep{Liu2012,Claes2014,He2008}. Recently, Aschard and colleagues \ref{Aschard2014} demonstrated that simply focusing on the principal components with the highest variance might not exploit the full potential of using PCA for genetic association. They propose a model of combined PCA where the PCs are grouped based on the level of variance they explain. They show a power gain in detecting genetic associations compared to simple approaches of only testing the top few PCs.
+
+While the PCA dimensionality reduction approach focus on the phenotype space and subsequent association with the genotypes, CCA finds the optimal linear transformation of the phenotypes while simultaneously testing for the association with the genotypes. Originally proposed by Hotelling for a general set of variables that remain invariant under internal linear transformation\citeyear{Hotelling1936}, in quantitative genetics CCA seeks to maximise the canonical (ordered) correlation  between the transformed phenotypes and genotypes. The transformation of the phenotypes and the maximal canonical correlation are found by eigendecomposition of a complex covariance term containing the empirical sample covariance matrices of the phenotypes and the genotypes as well as the cross-covariances of the phenotypes and genotypes. For a single genetic marker, CCA finds the linear phenotype transformation that explains the maximum amount covariance between this genotype and all traits and the eigenvector corresponding to the largest eigenvalue is used for transformation of the phenotypes \citep{Yang2102}. Ferreira and Purcell \citeyear{Ferreira2009} showed in simulations that CCA with multiple traits and one genetic marker controls well for type I errors and has increased power compared to multivariate tests. In order to extend CCA to more than one marker, the genotypes also have to undergo a linear transformation and the maximum canonical correlation is found by solving two eigenvalue problems. As the number of genotype markers in GWAS exceeds the number of samples, estimates of the genetype covariance term becomes unreliable \citep{Schaefer2005}. Several methods have been developed to circumvent this issue, making use of sparse matrices \citep{Parkhomenko2009} or a priori grouping of the genotypes \citep{Naylor2010}. 
+
+\paragraph{Meta-analysis approaches} Meta-analysis approaches combine the simplicity of the univariate approaches with the advantages of the multivariate approach. For each phenotype, a univariate association study is conducted and the summary stastics of these tests combined. Many methods for combining the summary statistics \citep{Xu2003,Yang2010,Yang2012,Bolormaa2014} go back to the work by O'Brien \citep{O'Brien1984}, who proposed to use a linear combination of the observed test statistics for each univariate test \(\mat{T} =(T_1, \dots, T_P)^T\) as the new statistics to be evaluated for significance.  \tmat{T} is asymptoctically normal distributed with mean \(\mat{\mu} = (\mu_1,\ldots, \mu_P)^T\) and covariance matrix \(\mat{\Sigma}\). O'Brien stastistic allows for testing the Null hypothesis \(H_0: \mu = 0\) against the alternative hypothesis of  \(H_1: \mu_p \ge 0, p=1, \ldots , P \) and is most powerful if \(\mu_1= \ldots =\mu_P\) \citep{Xu2003}. It is defined as: \(S = \mat{J}^T \mat{\Sigma}\mat{T}\), with \(\mat{J} = (1, 1, \ldots, 1)^T\).  The statistic has been modified in a number of studies, by adapting either the weighting matrix \tmat{J}, the covariance matrix \tmat{\Sigma} or both. Xu and colleagues \citeyear{Xu2003} optimised \(S\) to allow for testing against a general \(\mu\) rather then for a case where  \(\mu_1= \ldots =\mu_P\) by allowing for flexible, but restrained weights in \tmat{J}. Similarily, Yang and colleagues  \citeyear{Yang2010} proposed non-uniform weights to reflect heterogeneity in the means and use a sample splitting and cross-validation approach to determine the optimal weights. 
+While the previous two studies showed an increase in power for using the combined statistic, they either used a small marker set or small number of phenotypic traits.  Bolormaa and colleagues showed that these power gains also hold for genotype to phenotype mapping of 32 traits across all genome-wide markers \citep{Bolormaa2014}. In their study, the weights of O'Briens proposal are substituted by the signed t-statistic. 
+
+\paragraph{Regression models} There are a number of different regression models that allow for the multivariate analysis of phenotypes. Among them are graphical models, generalized estimation equations and frailty models, for which a summary of methods and application can be found in \citep{Shriner2012,Yang2012}. Here, I will focus on describing the development of multivariate linear regression models for genotype-phenotype mapping. Before the era of GWAS, QTL mapping in linkage experiments have demonstrated the increase in power when jointly analysing traits with common underlying genetics. Jiang and colleagues \citeyearpar{Jiang1995} proposed a multi-trait model where the phenotypes are jointly modeled as the sum of the fixed genetic effects of interest, fixed effects for genetic background variation and residual noise. They show that the joint analysis of traits can increase power to detect the underlying genetics and can increase the precision of the parameter estimates. The significance of the association is determined via a likelihood ratio test of the parameter estimates under the Null model where the fixed genetic effect is zero and the parameter estimates under the alternative model. The alternative model design depends on the underlying biological hypothesis regarding the effect of the genetic variant. Here, Jiang and colleagues differentiate hyptheses for a simple joint mapping of phenotypes, pleiotrophy and gene-environment interactions. Joint mapping does not make any assumptions about the underlying genetic architecture and simply tests if an association can be found when both traits are analysed jointly, i.e. the effect of the genetic variant is non-zero for at least one of the traits. This hypothesis can be extended in requiring that the effect on both traits is unequal to zero. In this case, the genetic variant is considered to be pleiotrophic. To test for gene-environment interaction, the different conditions a trait was studied in can be treated as different traits and be jointly mapped. If the effect size estimates of the genetic variant are not equal, the variant is considered to have environmental interactions.  Methods developed thereafter often use the same underlying hypotheses for the mapping, but different techniques for the evaluation of the significance. For instance, two other groups developed methods for the joint analysis of traits based specifically on the residual sum of squares (RSS) matrix of the standard linear model (\cref{eq:lm}) estimated at each locus tested \citep{Knott2000,Korol2001}. In the model proposed by Knott and Haley, the different properties and descriptors of the RSS are used to determine the significance of the QTL mapping. To test for pleiotropy for instance, the determinent of the RSS at the test locus is compared to the RSS of the null model of no association. In contrast, Korol and colleagues propose to use the RSS of the multi-trait mapping as a means for trait transformation and dimensionality reduction. The resulting one-dimensional trait per sample is fitted in a single-trait test for significance testing.  While methods described so far have only used fixed genetic effects, Korte and colleagues \citeyear{Korte2012} were the first to introduce a random genetic effect into the model. Based on the original model by Jiang, they substituted the fixed effect accounting for background genetics by a random effect, turning the multivariate linear model into a mulitvariate linear mixed model (Equation~\ref{eq:lmm}). Based on these principals and method development for the efficient analysis of large cohort sizes, a number of publically available frameworks for the genome-wide mapping of a moderate number of traits via multivariate linear mixed models were developed. \citep{Korte2012,Yang2011,Lippert2014,Zhou2014,Casale2015}. 
+
+Out of the differerent approaches described above, multivariate linear mixed models (LMMs) have the additional advantage that they can control for complex population structure and relatedness. 
+
+\section{Multi-variate linear models for joint analysis of multiple phenotypes}
+Extending the model to a multi-variate linear model, i.e. jointly modeling multiple phenotypes \(P\), requires the introduction of trait-design matrices for the fixed effects (\(\mat{A}\) and \(\mat{B}\) for the covariate and genetic effect respectively) and a trait-by-trait covariance matrix \tmatsub{C}{n} for the residual noise:
+\begin{equation}
+\mat{Y} =\mat{F}\mat{A}\matsub{W}{\alpha} +\mat{x}\mat{B}\matsub{W}{\beta} + \mat{\psi},\text{ }
+\mat{\psi}\sim \multinormal N P 0 {\matsub{C}{n} \otimes\matsub{I}{N}}
+\label{eq:lm-mv}
+\end{equation}
+
+with
+\begin{align*} 
+& \text{the Kronecker product } \otimes \\
+& \text{the phenotype matrix }\mat{Y} \inR N P,\\
+& \text{the matrix of $K$ covariates }\mat{F} \inR N K,\\
+& \text{the effect of covariates } \mat{A} \inR K M,\\
+& \text{the trait design matrix of the covariates }\matsub{W}{\alpha} \inR M P,\\
+& \text{the genetype vector of the SNP being tested }\mat{x} \inR N 1\\
+& \text{the effect size of the SNP } \mat{B} \inR 1 L \text{and}\\
+& \text{the trait design matrix of the genotype }\matsub{W}{\beta} \inR L P,\\
+\end{align*} 
+
+The trait design matrices \(\mat{W}_{\alpha}\) and \(\mat{W}_{\beta}\) allow different scenarios of the cross-trait architecture of the independent effects on the phenotype (details described in \cref{section:model-design}).  
+
+In the multi-variate case, the MLE of the trait covariances are \(P\times P\) trait-by-trait covariance matrices \tmatsub{C}{g} and \tmatsub{C}{n} for the genetic and noise components, respectively (Equation \ref{eq:lmm-mv}).
+
+\begin{equation}
+\mat{Y} =\mat{F}\mat{A}\mat{W}_{\alpha} +\mat{x}\mat{B}\mat{W}_{\beta} +\mat{g}+\mat{\psi},\text{ }
+\mat{g}\sim \multinormal N P 0 {\matsub{C}{g} \otimes \matsub{R}{N}},\text{ }
+\mat{\psi}\sim \multinormal N P 0 {\matsub{C}{n} \otimes \matsub{I}{N}}
+\label{eq:lmm-mv}
+\end{equation}
+
+with
+\begin{align*} 
+& \text{the Kronecker product } \otimes \\
+& \text{the phenotype matrix }\mat{Y} \inR N P ,\\
+& \text{the matrix of $K$ covariates }\mat{F} \inR N K,\\
+& \text{the effect of covariates } \mat{A} \inR K M,\\
+& \text{the trait design matrix of the covariates }\matsub{W}{\alpha} \inR M P,\\
+& \text{the genetype vector of the SNP being tested }\mat{x} \inR N 1\\
+& \text{the effect size of the SNP } \mat{B} \inR 1 L \text{and}\\
+& \text{the trait design matrix of the genotype }\matsub{W}{\beta} \inR L P,\\
+\end{align*} 
+
+In LMMs, both the residual noise and the genetic backgound are modeled as random effects. For the random genetic effect, a complex covariance structure can be modeled such that family structure and relatedness captured in the genotypes can be exploited to model background genetic correlations in phenotype\citep{Yu2006,Kang2008} (\cref{eq:lmm}). The random effects are assumed to be composed of a sample-by-sample and trait-by-trait covariance component. The genetic sample covariance can be obtained from the data itself, e.g. using a genetic relationship matrix (GRM) or identity by descent, whereas the trait covariance terms need to be estimated from the observed data. Since the introduction of LMM for multi-trait GWAS studies, LMMs have been extended to handle the large sample sizes obtained in particular in human studies, allowing for cohort sizes of \red{xxx}  individuals \citep{Zhou2014}. However nearly all current methods scale poorly in the number of traits ($P$) due to a bottle neck caused by estimating the trait covariance terms. 
+
+\section{Model design}
+\label{section:model-design}
+In the most simple case, one can test if the genetic variant has an effect on any of the traits \(P\) (any effect test) i.e. the effect size of the fixed effect is unequal to zero for at least one trait : \(H_\text{A}: \mat{\beta} \ne \mat{0}_P\).  In this \(P\)-degrees of freedom test, the corresponding null hypthesis of no association is that the effect size of the fixed effect is equal to zero: \(H_0:\mat{\beta}  = \mat{0}_P\). In the common effect model, the variant has the same effect size across all traits (\(\mat{\beta}  = \mat{1}_P\beta)\) and is tested for significance in a one degree of freedom model versus the null hypothesis of no association (\(\mat{\beta}  = \mat{0}_P\)). A more complicated model allows to test for specific effects of the variant on a given trait \(p\). This can be tested with a one degree of freedom test where a model containing a common effect across all traits and a specific effect for trait \(p\) is compared against the common effect model.
+
+For instance, in an 'common effect' setup where the genetic variant is assumed to have the same effect across all traits,  \tmat{B} is equal to \(1_{1xP}\) (\(L=1\)). Allowing different effects across all traits corresponds to  \( \mat{B} =  \matsub{I}{P} \) (\(L=P\)). In such a `any effect' setup, the multi-trait modelling simply serves to increase power for detecting genetic variants. 
