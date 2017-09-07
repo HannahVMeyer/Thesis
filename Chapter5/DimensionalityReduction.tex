@@ -1,21 +1,45 @@
-\section{Dimensionality reduction}
-\begin{figure}[hbtp]
+\newpage
+\section{Dimensionality reduction yields stable low-dimensional phenotype representations}
+\label{section:DimRed-heart}
+The detailed 3D models of the heart structure offer a rich dataset for investigating spatially-resolved genetic associations on cardiac morphology. By extracting the relevant features from the CMR images, the phenotype space has been reduced from intensity values at \num{140000} voxels to wall thickness measurements at about \num{27000} 3D coordinates. While this processing condensed the original image space into relevant phenotype information, considering each position as a phenotype would still require \(2\times 10^5\)  single-trait association test which have to be adjusted for multiple testing and which would not be able to take advantage of correlation structure in the phenotypes. In contrast, a multi-trait association test would be more powerful by modeling the correlated traits jointly, however its test-statistic would be subjected to a \(2 \times 10^5\)  degree of freedom test. To avoid this burden of correcting for the high-dimensionality of the traits while making use of intrinsic structure in the data, I applied the \num{12} dimensionality reduction methods tested in \cref{chapter:DimReduction} to the \num{27623} heart wall thickness measurements in order to find the best low-dimensional representation of the dataset. The low-dimensional components will then serve as proxy phenotypes in the GWAS.
+
+Before applying the dimensionality reduction methods, I adjusted the wall thickness measurements for any known covariates such that the low-dimensional components ideally only reflect structure truly related to the underlying cardiac biology. Any covariates with an assumed linear effect on the wall thickness were used as explanatory variables in a linear model with wall thickness as a response variable. This model was applied independently for each of the \num{27623} left ventricular wall thinkness measures with biological (sex, age, height, weight) and potential technical (MRI operator, date of the image aquisition, MRI machine, date of the image segmentation) covariates. Other, more complicated covariance structure could arise due to related individuals in the dataset. In order to avoid confounding of subsequent analyses potentially introduced through high levels of relatedness between a number of individuals, related samples were removed from the analysis based on the quality control of the genotypes (\cref{subsection:genotypes}). 
+
+The parameters for the dimensionality reduction were chosen as in \cref{tab:dimRed-R} and the maximum dimension set to \num{100}. The optimal number of neighbours was estimated as \(n=40\).  The dimensionality reduction was performed on the residuals of the linear regression described above. 
+In analogy to the strategies described in \cref{subsection:stability-DimRed}, I split the dataset into subsets of \num{80}\% of the samples, computed the dimensionality reduction and repeated this step ten times. From these cross-validations, I computed the trustworthiness (\cref{eq:trustworthiness}), continuity (\cref{eq:continuity}) and number of stable components. ICA on this dataset with the fastICA::fastICA function in R was not possible and failed with fortran indexing errors. As the dimensionality reduction with ICA yielded the least stable results in the previous chapter, this dimensionality reduction strategy was not investigated further on the heart data.  
+
+An initial look at the number of stable components showed a median of ten stable components across all methods. As a first manual control of the low-dimensional representation, I qualitatively analysed the distribution and pair-wise density of the first ten dimensions of each method. While most methods showed a similar spread and distribution of their components with differing levels of correlation, components from kPCA and DiffusionMaps were clear outliers from this observation. \Cref{fig:distribution-DimRed} shows the pairs-wise comparisons for components from DiffusionMaps and kPCA as well as Laplacian Eigenmaps and PCA as references for well-behaved data. For the PCA data (\cref{fig:distribution-DimRed}\subfig{B}), components show the widely uncorrelated behavior expected for orthogenal vectors \cref{section:DimReduction-methods}. Components derived from Laplacian Eigenmaps (\cref{fig:distribution-DimRed}\subfig{D}) display different levels of correlation, from mostly uncorrelated (DR6 vs DR10) to strong non-linear correlation (DR1 vs DR2). DiffusionMaps and kPCA show very little spread in their data, with the distribution of each component spiking at a particular value and \num{0} elsewhere ( \Cref{fig:distribution-DimRed}\subfig{A,C}, diagonal). Similar plots for the other, well-behaved methods can be found in \cref{fig:distributionAll-DimRed}. Based on these observations and without a clear indication as to why these results were observed (i.e. no warnings or error messages in the computation), components from DiffusionMaps and kPCA were not considerd in further analyses. 
+
+\begin{figure}[h!]
 	\centering
-	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.8\textwidth]{Chapter4/Figures/robustnessDimReductionHeart.pdf}
-	\caption[\textbf{.}]{\textbf{.} } 
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=\textwidth]{Chapter5/Figures/componentsQC.pdf}
+	\caption[\textbf{Pair-wise scatterplots of low-dimensional components derived from left-ventricular wall thickness. }]{\textbf{Pair-wise scatterplots of low-dimensional components derived from left-ventricular wall thickness. }For components from DiffusionMaps (A), PCA (B), kPCA (C) and LaplacianEigenmaps (D),  pairwise scatter plots of the components (lower triangle) and density plots (upper triangle) are depicted. The diagonal of each plot shows the distribution of the respective component. Row and colum labels specify the rank of the component out of the \num{100} low-dimensional components. Before plotting, each component was mean-centered and divided by its standard deviation in order to have comparable axis dimensions. Given the normalised scale of the data, and the purpose of qualitative comparison, axis ticks were omitted for a cleaner visualisation. }
+	 	\label{fig:distribution-DimRed}
+\end{figure}
+
+For the majority of methods, the low-dimensional representation has a high level of trustworthiness, with seven methods above \num{90}\% for each cross-validation steps and the full dataset (\cref{fig:dimRed-heart}\subfig{A}, boxplots and diamond shape). Only PEER does not reach that threshold. The same result is observed for continuity, with exception for LLE, whose low-dimensional representation of the full dataset does not lie above \num{90}\% (\cref{fig:dimRed-heart}\subfig{B}).  To provide a consistent \textit{a priori} selection of methods, I only considered stable components reliable if their continuity and trustworthiness measures were above \num{90}\% for both the full dataset and the cross-validations. Based on these criteria, components retrieved from DRR (ten), MDS (ten), Isomap (\num{4}), LaplacianEigenmaps (\num{5}), PCA (ten) and nMDS  (ten) were considered for further analyses.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.7\textwidth]{Chapter5/Figures/robustnessDimReductionHeart.pdf}
+	\caption[\textbf{Dimensionality reduction of 3D heart phenotypes. }]{\textbf{Dimensionality reduction of 3D heart phenotypes. } The boxplots in A. and B. show the maximum trustworthiness and continuity across neighbourhood sizes ranging from \numrange{1}{3}\% of the samples for the ten cross-validation sets for each method. The diamonds show the respective measures for the full dataset. Dotted lines are drawn at \num{0.9}, the threshold chosen here at which a projection is considered a good representation of the original space. C. The number of traits passing the stability criterion. For methods that passed the threshold for both continuity and trustworthiness in the full dataset, the number of stable traits is printed above the bar chart. The corresponding traits are taken as input for the multi-trait GWAS.}
 	 	\label{fig:dimRed-heart}
 \end{figure}
 
+As demonstrated in \cref{chapter:DimReduction,fig:dimRed-iris}, there is a considerable degree of similarity in the low-dimensional representations for a some of the methods tested, especially the linear and PCA-based methods. I analysed the extend of similarities between the stable components from the six methods passing the trustworthiness/continuity threshold by computing the pair-wise Pearson correlation based on the absolute value of their components.  The stable components from PCA, MDS and nMDS show perfect correlation, as expected given the strong mathematical similarity of these methods when using Euclidean distance as the distance measure. Isomap, which builds the bridge between the linear and non-linear models as it is based on MDS and kernel-eigenmaps (\cref{section:DimReduction-methods}) shows weaker but still strong correlation to the first three methods. Components derived from Laplacian Eigenmaps are only weakly correlated with those from any other method. 
+\\
 \begin{figure}[hbtp]
 	\centering
-	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.8\textwidth]{Chapter4/Figures/lm_mt_pcs_pvalue_LIMIX_multitrait_manhattanplot.png}
-	\caption[\textbf{.}]{\textbf{.} } 
-	 	\label{fig:dimRed-heart}
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.6\textwidth]{Chapter5/Figures/correlationDimReductionHeart.pdf}
+	\caption[\textbf{Correlation of low-dimensional components across methods. }]{\textbf{Correlation of low-dimensional components across methods. } The Pearson correlation coefficients across the stable components of methods that passed the continuity and trustworthiness criteria was computed. The elipses above show the mean strength of the absolute value of the correlation across all components. For the comparison of PCA, nMDS, MDS, DRR and DiffusionMaps (ten components each) to Isomap and Laplacian Eigenmaps (three and five components), the first three five components were chosen for comparison. }
+	 	\label{fig:dimRed-correlation}
 \end{figure}
 
-\begin{figure}[hbtp]
-	\centering
-	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.8\textwidth]{Chapter4/Figures/lm_mt_pcs_pvalue_LIMIX_multitrait_qqplot.png}
-	\caption[\textbf{.}]{\textbf{.} } 
-	 	\label{fig:dimRed-heart}
-\end{figure}
+However, \cref{chapter:DimReduction,fig:dimRed-iris,fig:dimRed-roll} also demonstrated the differences in low-dimensional representation for the other methods, in particular between linear and non-linear methods. Without prior knowledge about the true biological features, i.e. the `real' low-dimensional manifold of the left ventricular wall thickness measurements, it is not possible to know which methods will be most suitable in capturing this manifold structure. 
+Instead of choosing a single method to find components to represent the manifold, I combined the stable components from models above for which the cross-method correlation was less than \num{90}\%. From the group of highly to perfectly correlated methods (DDR and PCA, MDS, nMDS), I choose the components from PCA. Thus, the final low-dimensional representation of the \num{27623} left-ventricular wall thickness measurements is comprised of ten stable components from PCA, four from Isomap and five from Laplacian Eigenmaps, a total of \num{19} dimensions.
+
+
+
+ 
+
+
