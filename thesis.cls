@@ -116,4 +116,11 @@ format=plain,
 
 \newcommand{\red}{\textcolor{red}}
 \newcommand{\subfig}{\textcolor{black!70}}
+
+\newcommand{\beginsupplement}{%
+	\setcounter{chapter}{0}
+	\renewcommand\thechapter{\Alph{chapter}}
+}
+
+
 \endinput
