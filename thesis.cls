@@ -13,6 +13,7 @@
 \RequirePackage{subcaption}
 \RequirePackage{tocstyle}
 \RequirePackage{siunitx} %for number formating
+\RequirePackage[toc,xindy,acronyms,nomain]{glossaries}
 
 % language
 \RequirePackage{polyglossia}
@@ -23,10 +24,18 @@
 \RequirePackage{nth} % ordinal numbers
 \RequirePackage{scalefnt} % rescale fonts
 \RequirePackage{url} % allows line breaks in refs,lniks
+\usepackage{fix-cm} % for chapter numbers
+\usepackage{titlesec} % for chapter numbers
+
+
+%font packages
+\RequirePackage{fontspec}
+\RequirePackage{textcomp}
 
 % math packages
+%\RequirePackage{xfrac}
+\RequirePackage{lualatex-math}
 \RequirePackage{amsmath}
-\RequirePackage{fontspec}
 \RequirePackage{unicode-math} % needs to be loaded after any other math(-related) package
 
 % figure related packages
@@ -41,8 +50,24 @@
 \RequirePackage{booktabs} 
 \RequirePackage{longtable}
 
+\RequirePackage{scrhack}
 % bib packages
-\RequirePackage[natbib, backend=biber, style=authoryear, maxcitenames=2, maxbibnames=99, useprefix]{biblatex}
+\RequirePackage[natbib, 
+	backend=biber, 
+	style=authoryear, 
+	sorting=nyt, 
+	maxcitenames=2, 
+	minbibnames=20,
+	maxbibnames=20, 
+	doi=false, 
+	date=year, 
+	isbn=false, 
+	url=false, backref, 
+	useprefix, 
+	uniquename=false, 
+	uniquelist=false,
+	dashed=false,
+	firstinits=true]{biblatex}
 
 % possibly for use 
 %\RequirePackage{etoolbox}
@@ -60,7 +85,34 @@
 \usetocstyle{nopagecolumn}
 
 % bibliography
-\DefineBibliographyStrings{english}{andothers = {\&~al\adddot}}
+\DeclareNameAlias{sortname}{last-first} % alsways last name, then first name in bibliography
+\setlength\bibitemsep{0.2\baselineskip} % increase distance between bibliography entries
+
+\DefineBibliographyStrings{english}{%
+	andothers = {\&~al\adddot},
+	and= {\&},
+	bibliography = {References},
+  	references = {References},
+	shorthands = {{List of Abbreviations}{Abbreviations}},
+	}
+	
+\AtEveryCite{%
+    \let\bibopenparen=\bibopenbracket%
+    \let\bibcloseparen=\bibclosebracket}
+
+\DeclareFieldFormat[article,inbook]{title}{#1} % removes quotation marks around title
+\DeclareFieldFormat{pages}{#1} % removes 'pages' before pages are printed
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\renewbibmacro{in:}{} % removes 'in' before name of journal
+\renewcommand{\labelnamepunct}{\addspace} % removes punctuation of title
+\renewcommand{\bibpagespunct}{\addcolon\space} % adds colon between issue and pages
+\renewbibmacro*{volume+number+eid}{% remove dot behind volume
+  \printfield{volume}%
+  \setunit{}%
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+\renewcaptionname{english}{\bibname}{References}  
 
 % caption setup 
 \captionsetup{
@@ -75,7 +127,8 @@ format=plain,
 
 % color settings
 \colorlet{thesis@toccolor}{black}
-\colorlet{thesis@linkcolor}{black!70}
+\colorlet{thesis@linkcolor}{black!75}
+\colorlet{chapnumcol}{gray!75}  % color for chapter number
 
 % hyperref set up
 \hypersetup{
@@ -89,7 +142,13 @@ format=plain,
 }
 
 % font setup
-\setmainfont[Ligatures=TeX, Numbers=OldStyle]{TeX Gyre Pagella}
+\setmainfont[
+	Ligatures=TeX, 
+	Numbers=OldStyle
+]{TeX Gyre Pagella}
+\setmathfont[bold-style=TeX]{Latin Modern Math}
+%\mathversion{pagella}
+
 \setsansfont[
     Ligatures=TeX,
     UprightFont={* Light},
@@ -100,7 +159,8 @@ format=plain,
 ]{Gill Sans}
 
 
-\setmathfont[bold-style=TeX,]{texgyrepagella-math.otf}
+
+%\setmathfont[BoldFont=*bold]{TeX Gyre Pagella Math}
 %\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
 %\setmathfont[Extension=.otf, BoldFont=*bold]{texgyrepagella-math}
 
@@ -112,15 +172,19 @@ format=plain,
     group-minimum-digits = 4,
 }
 
-
+% chapter headings
+\newcommand{\chapnumfont}{%     % define font for chapter number
+  \fontseries{b}      % choose New Chancery, bold, normal shape
+  \fontsize{100}{100} % font size 100pt, baselineskip 100pt
+  \selectfont%                  % activate font
+}
 
 \newcommand{\red}{\textcolor{red}}
-\newcommand{\subfig}{\textcolor{black!70}}
+\newcommand{\subfig}{\textcolor{black!75}}
+
 
 \newcommand{\beginsupplement}{%
 	\setcounter{chapter}{0}
 	\renewcommand\thechapter{\Alph{chapter}}
 }
 
-
-\endinput
