@@ -1,0 +1,91 @@
+\BOOKMARK [0][-]{chapter*.2}{List of Figures}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{List of Tables}{}% 2
+\BOOKMARK [0][-]{chapter*.5}{Summary}{}% 3
+\BOOKMARK [0][-]{chapter.6}{Introduction}{}% 4
+\BOOKMARK [1][-]{section.7}{From ancient ideas of inheritance to the birth of modern genetics}{chapter.6}% 5
+\BOOKMARK [2][-]{subsection.9}{Mendelian Laws of Inheritance}{section.7}% 6
+\BOOKMARK [2][-]{subsection.10}{Biometrics}{section.7}% 7
+\BOOKMARK [2][-]{subsection.11}{Molecular basis of inheritance}{section.7}% 8
+\BOOKMARK [1][-]{section.12}{The Laws of Inheritance on a cellular level}{chapter.6}% 9
+\BOOKMARK [1][-]{section.13}{Genetic linkage}{chapter.6}% 10
+\BOOKMARK [1][-]{section.14}{Towards quantitative genetics}{chapter.6}% 11
+\BOOKMARK [1][-]{section.15}{Progress in deciperhing the molecular mechanisms of inheritance}{chapter.6}% 12
+\BOOKMARK [2][-]{subsection.16}{Novel genotype mapping techniques}{section.15}% 13
+\BOOKMARK [2][-]{subsection.17}{Deciphering DNA sequences}{section.15}% 14
+\BOOKMARK [1][-]{section.18}{From genetic linkage analysis to genome-wide association studies}{chapter.6}% 15
+\BOOKMARK [2][-]{subsection.19}{Genotype-phenotype mapping until the 1990s}{section.18}% 16
+\BOOKMARK [2][-]{subsection.23}{Common disease–common variant hypothesis}{section.18}% 17
+\BOOKMARK [2][-]{subsection.25}{Databases of human variation}{section.18}% 18
+\BOOKMARK [2][-]{subsection.26}{Genotyping of large cohorts}{section.18}% 19
+\BOOKMARK [2][-]{subsection.27}{Genome-wide association studies}{section.18}% 20
+\BOOKMARK [1][-]{section.28}{Linear models for genome-wide association studies}{chapter.6}% 21
+\BOOKMARK [2][-]{subsection.29}{Linear regression}{section.28}% 22
+\BOOKMARK [2][-]{subsection.51}{Simple linear model for genotype associations with a single trait}{section.28}% 23
+\BOOKMARK [2][-]{subsection.53}{Testing the genotype association for significance}{section.28}% 24
+\BOOKMARK [2][-]{subsection.60}{Correcting for multiple hypotheses testing in GWAS}{section.28}% 25
+\BOOKMARK [2][-]{subsection.66}{Accounting for population structure and genetic kinship}{section.28}% 26
+\BOOKMARK [2][-]{subsection.70}{Linear mixed models}{section.28}% 27
+\BOOKMARK [2][-]{subsection.88}{Joint analysis of multiple phenotypes}{section.28}% 28
+\BOOKMARK [2][-]{subsection.92}{Linear mixed models for the joint analysis of multiple phenotypes}{section.28}% 29
+\BOOKMARK [0][-]{chapter.107}{Cardiac biology}{}% 30
+\BOOKMARK [1][-]{section.109}{Cardiac cycle}{chapter.107}% 31
+\BOOKMARK [1][-]{section.110}{Conduction system}{chapter.107}% 32
+\BOOKMARK [1][-]{section.111}{Heart development}{chapter.107}% 33
+\BOOKMARK [1][-]{section.113}{Common cardiovascular diseases}{chapter.107}% 34
+\BOOKMARK [1][-]{section.114}{Genetics of cardiovascular diseases}{chapter.107}% 35
+\BOOKMARK [1][-]{section.116}{Thesis outline}{chapter.107}% 36
+\BOOKMARK [0][-]{chapter.117}{PhenotypeSimulator}{}% 37
+\BOOKMARK [1][-]{section.118}{Genotype simulation}{chapter.117}% 38
+\BOOKMARK [1][-]{section.123}{Phenotype simulation}{chapter.117}% 39
+\BOOKMARK [0][-]{chapter.135}{Extending linear mixed models to high-dimensional phenotypes}{}% 40
+\BOOKMARK [1][-]{section.138}{LiMMBo: Linear mixed modeling with bootstapping}{chapter.135}% 41
+\BOOKMARK [1][-]{section.141}{Covariance estimation via bootstrapping}{chapter.135}% 42
+\BOOKMARK [1][-]{section.143}{Data simulation}{chapter.135}% 43
+\BOOKMARK [1][-]{section.144}{Scalability of LiMMBo}{chapter.135}% 44
+\BOOKMARK [1][-]{section.148}{LiMMBo yields covariance estimates consistent with REML estimates for moderate trait numbers}{chapter.135}% 45
+\BOOKMARK [1][-]{section.151}{mtGWAS with LiMMBo-derived covariance matrices are well calibrated across all phenotype sizes}{chapter.135}% 46
+\BOOKMARK [1][-]{section.154}{Multi-trait genotype to phenotype mapping increases power for high-dimensional phenotypes}{chapter.135}% 47
+\BOOKMARK [1][-]{section.156}{LiMMBo for multi-trait GWAS and beyond}{chapter.135}% 48
+\BOOKMARK [0][-]{chapter.157}{LiMMBo applied to multi-trait GWAS in Saccharomyces cerevisiae}{}% 49
+\BOOKMARK [1][-]{section.161}{Dataset and imputation}{chapter.157}% 50
+\BOOKMARK [2][-]{subsection.162}{Missing data mechanism}{section.161}% 51
+\BOOKMARK [2][-]{subsection.165}{Imputation via MICE}{section.161}% 52
+\BOOKMARK [1][-]{section.174}{Multi-trait GWAS with LiMMBo}{chapter.157}% 53
+\BOOKMARK [2][-]{subsection.175}{LiMMBo increases power in detecting genetic associations}{section.174}% 54
+\BOOKMARK [2][-]{subsection.179}{Multi-trait effect size estimates as indicators for common biology}{section.174}% 55
+\BOOKMARK [1][-]{section.181}{Summary}{chapter.157}% 56
+\BOOKMARK [0][-]{chapter.182}{Low-dimensional representations of very high-dimensional data}{}% 57
+\BOOKMARK [1][-]{section.184}{Review of dimensionality reduction methods}{chapter.182}% 58
+\BOOKMARK [1][-]{section.195}{Visualisation of data structures by dimensionality reduction}{chapter.182}% 59
+\BOOKMARK [1][-]{section.201}{Quantification of dimensionality reduction performance}{chapter.182}% 60
+\BOOKMARK [1][-]{section.206}{Dimensionality reduction for feature extraction}{chapter.182}% 61
+\BOOKMARK [2][-]{subsection.207}{Stability of dimensionality reduction}{section.206}% 62
+\BOOKMARK [2][-]{subsection.211}{Stable features enable discovery of genetic associations}{section.206}% 63
+\BOOKMARK [1][-]{section.215}{Dimensionality reduction is a powerful tool for genetic association studies}{chapter.182}% 64
+\BOOKMARK [0][-]{chapter.216}{GWAS of left ventricular wall thickness}{}% 65
+\BOOKMARK [1][-]{section.217}{Data}{chapter.216}% 66
+\BOOKMARK [2][-]{subsection.218}{Genotypes}{section.217}% 67
+\BOOKMARK [2][-]{subsection.225}{Phenotypes}{section.217}% 68
+\BOOKMARK [1][-]{section.228}{Dimensionality reduction yields stable low-dimensional phenotype representations}{chapter.216}% 69
+\BOOKMARK [1][-]{section.232}{Multi-trait GWAS detects three loci associated with heart wall thickness}{chapter.216}% 70
+\BOOKMARK [1][-]{section.240}{Successful imaging genetics of cardiac phenotypes}{chapter.216}% 71
+\BOOKMARK [0][-]{chapter.241}{GWAS of left ventricular trabeculation}{}% 72
+\BOOKMARK [1][-]{section.242}{Left ventricular trabeculation}{chapter.241}% 73
+\BOOKMARK [1][-]{section.243}{Image acquisition and phenotyping}{chapter.241}% 74
+\BOOKMARK [1][-]{section.245}{The complexity of trabeculation shows a consistent base to apex pattern}{chapter.241}% 75
+\BOOKMARK [1][-]{section.247}{Relationship between trabeculation phenotypes and covariates}{chapter.241}% 76
+\BOOKMARK [1][-]{section.250}{Left ventricular trabeculation is associated with two genomic loci}{chapter.241}% 77
+\BOOKMARK [1][-]{section.256}{Summary}{chapter.241}% 78
+\BOOKMARK [0][-]{chapter.257}{Concluding remarks}{}% 79
+\BOOKMARK [-1][-]{chapter*.258}{Appendix}{}% 80
+\BOOKMARK [0][-]{chapter.259}{Supplementary tables}{chapter*.258}% 81
+\BOOKMARK [1][-]{section.260}{Additional information chapter:intro-heart}{chapter.259}% 82
+\BOOKMARK [1][-]{section.262}{Additional results chapter:GWAS-3Dheart}{chapter.259}% 83
+\BOOKMARK [0][-]{chapter.264}{Supplementary Figures}{chapter*.258}% 84
+\BOOKMARK [1][-]{section.265}{Additional results chapter:limmbo}{chapter.264}% 85
+\BOOKMARK [1][-]{section.267}{Additional results chapter:yeast}{chapter.264}% 86
+\BOOKMARK [1][-]{section.269}{Additional results chapter:DimReduction}{chapter.264}% 87
+\BOOKMARK [1][-]{section.271}{Additional results chapter:GWAS-3Dheart}{chapter.264}% 88
+\BOOKMARK [1][-]{section.277}{Additional results chapter:GWAS-FD}{chapter.264}% 89
+\BOOKMARK [0][-]{chapter.279}{Derivations}{chapter*.258}% 90
+\BOOKMARK [0][-]{chapter*.288}{References}{chapter*.258}% 91

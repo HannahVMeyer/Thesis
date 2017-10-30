@@ -169,7 +169,7 @@
 \begin{figure}[hbtp]
 	\centering
 	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip, width=0.65\textwidth]{Supplement/Figures/distributionAll-DimRed.pdf}
-	\caption[\textbf{Additional scatterplots for visual assessement of low-dimensional components derived from left-ventricular wall thickness. }]{\textbf{Additional scatterplots for visual assessement of low-dimensional components derived from left-ventricular wall thickness. }Pairwise scatter plots of the components (lower triangle) and density plots (upper triangle) are depicted. The diagonal of each plot shows the distribution of the respective component. Row and column labels specify the rank of the component out of the \num{100} low-dimensional components. Before plotting, each component was mean-centered and divided by its standard deviation in order to have comparable axis dimensions. Given the normalised scale of the data, and the purpose of qualitative comparison, axis ticks were omitted for a cleaner visualisation. }
+	\caption[\textbf{Additional scatterplots for visual assessment of low-dimensional components derived from left-ventricular wall thickness. }]{\textbf{Additional scatterplots for visual assessment of low-dimensional components derived from left-ventricular wall thickness. }Pairwise scatter plots of the components (lower triangle) and density plots (upper triangle) are depicted. The diagonal of each plot shows the distribution of the respective component. Row and column labels specify the rank of the component out of the \num{100} low-dimensional components. Before plotting, each component was mean-centred and divided by its standard deviation in order to have comparable axis dimensions. Given the normalised scale of the data, and the purpose of qualitative comparison, axis ticks were omitted for a cleaner visualisation. }
 	 	\label{fig:distributionAll-DimRed}
 \end{figure}
 
@@ -199,7 +199,7 @@
 \begin{figure}[hbtp]
 	\centering
 	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,  width=\textwidth]{Supplement/Figures/kinshipQC.pdf}
-	\caption[\textbf{Ethnicity of samples within the Digitial Heart project. }]{\textbf{Ethnicity of samples within the Digitial Heart project.} A. Sanger12. B. Duke-NUS12. C. Duke-NUS3. PCA was conducted on the SNP genotypes of the samples within the Digitial Heart project (gencall) and genotypes of four greater ethnicities of the HapMap project (black: African, orange:Mexican/Native American, grey: Caucasian, yellow: Asian) \citep{HapMap2005,HapMap2007}. The clustering of the samples based on the first and second principal components are depicted. Red dotted lines indicate borders considered to separate ethnicities: 1. Caucasian, 2: African, 3: Mexican/Native American, 4. Asian, 5: Mixed ancestry. Gencall samples within the first group were used in \cref{chapter:GWAS-3Dheart,chapter:GWAS-FD}.  A description of the analysis is described in \cref{subsection:genotypes}.}
+	\caption[\textbf{Ethnicity of samples within the Digitial Heart project. }]{\textbf{Ethnicity of samples within the Digital Heart project.} A. Sanger12. B. Duke-NUS12. C. Duke-NUS3. PCA was conducted on the SNP genotypes of the samples within the Digital Heart project (gencall) and genotypes of four greater ethnicities of the HapMap project (black: African, orange:Mexican/Native American, grey: Caucasian, yellow: Asian) \citep{HapMap2005,HapMap2007}. The clustering of the samples based on the first and second principal components are depicted. Red dotted lines indicate borders considered to separate ethnicities: 1. Caucasian, 2: African, 3: Mexican/Native American, 4. Asian, 5: Mixed ancestry. Gencall samples within the first group were used in \cref{chapter:GWAS-3Dheart,chapter:GWAS-FD}.  A description of the analysis is described in \cref{subsection:genotypes}.}
  	\label{fig:kinshipQC}
 \end{figure}
 
@@ -244,7 +244,7 @@ The structure of \tmat{C} depends on the design of the covariance effect. In ord
 \text{vec}(\mat{G}) \sim \multinormal N P {\mat{0}} {\mat{C} \otimes \mat{R}}.
 \end{equation}
 %
-With the cholesky decompositon of \tmat{R} and \tmat{C} into  \(\mat{R}=\mat{BB}^T\) and \(\mat{C}=\mat{AA}^T\) 
+With the Cholesky decomposition of \tmat{R} and \tmat{C} into  \(\mat{R}=\mat{BB}^T\) and \(\mat{C}=\mat{AA}^T\) 
 %
 \begin{equation}
 \text{vec}(\mat{G}) \sim \multinormal N P {\mat{0}} {\mat{AA}^T  \otimes \mat{BB}^T},  

@@ -1,0 +1,28 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces \textbf {Linear mixed model frameworks for genetic association studies.}}}{75}{table.caption.137}
+\contentsline {table}{\numberline {4.2}{\ignorespaces \textbf {Parameters for phenotype simulation.}}}{79}{table.caption.145}
+\contentsline {table}{\numberline {4.3}{\ignorespaces \textbf {Parameter values of simulated phenotypes for assessing scalability, calibration and power.}}}{79}{table.caption.146}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces \textbf {Comparison of significant loci in single-trait and multi-trait GWAS.}}}{104}{table.caption.178}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces \textbf {Dimensionality reduction methods.}}}{112}{table.caption.185}
+\contentsline {table}{\numberline {6.2}{\ignorespaces \textbf {R functions for dimensionality reduction methods and their parameters.}}}{118}{table.caption.196}
+\contentsline {table}{\numberline {6.3}{\ignorespaces \textbf {Simulation parameters of phenotypes used for stability estimation. }}}{126}{table.caption.208}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces \textbf {Sample and SNP numbers before and after the QC. }}}{143}{table.caption.220}
+\contentsline {table}{\numberline {7.2}{\ignorespaces \textbf {Strongest genotype-phenotype association per locus for 3D heart GWAS. }}}{154}{table.caption.235}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces \textbf {Association of \(\text {FD}_\text {max}^\text {basal}\) and \(\text {FD}_\text {max}^\text {apical}\) with covariates. }}}{167}{table.caption.249}
+\contentsline {table}{\numberline {8.2}{\ignorespaces \textbf {SNPs with strongest association in left ventricular trabeculation GWAS. }}}{169}{table.caption.253}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces \textbf {GWAS catalogue trait descriptions relating to cardiovascular diseases. }}}{182}{table.261}
+\contentsline {table}{\numberline {A.2}{\ignorespaces \textbf {Number of SNPs after imputation, imputation QC and filtering for deviation from HWE and low MAF. }}}{184}{table.caption.263}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
