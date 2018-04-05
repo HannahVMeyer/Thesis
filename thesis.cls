@@ -74,8 +74,13 @@
 % Font packages
 %\RequirePackage[explicit]{titlesec} % labeling of sections
 
-% ref packages
+% hyperref packages
 \RequirePackage{hyperref}
+
+% for list of abbreviations
+\RequirePackage[acronym]{glossaries-extra}
+
+% ref packages
 \RequirePackage[nameinlink, noabbrev]{cleveref} % has to be loaded last, according to manual
 
 %%% Settings

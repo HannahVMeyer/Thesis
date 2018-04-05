@@ -1,9 +1,12 @@
 \documentclass{thesis}
 \input{mathcommands}
+\makeglossaries 
+%\setabbreviationstyle{long-short-sc}% glossaries-extra.sty
+\loadglsentries{abbreviations.tex}
 
 \addbibresource{references.bib}
 \begin{document}
-
+\glsenablehyper
 \hyphenation{
 cross=va-li-da-tion
 high=di-men-sio-nal
@@ -18,7 +21,7 @@ de-signs
 spa-tially=re-solved
 l'Aca-de-mie
 maxi-mum=like-li-hood
-Me-de-li-an
+Men-de-li-an
 Seid-man
 dias-tro-phic
 Ca-nes-sa
@@ -29,6 +32,7 @@ Me-di-zi-nisch=che-mische
 chain=ter-mi-na-ting
 post=trans-la-tio-nal
 }
+
 
 \cleardoublepage
 \input{frontpage}
@@ -43,7 +47,9 @@ post=trans-la-tio-nal
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
 \cleardoublepage
-
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\printglossary[type=\acronymtype, title={List of Abbreviations}]
+\cleardoublepage
 \input{Summary}
 
 \titleformat{\chapter}[display]
@@ -53,6 +59,7 @@ post=trans-la-tio-nal
 {\huge}
 
 \input{Introduction/Intro-genetics}
+
 \input{Introduction/Intro-heart}
 \input{Chapter1/PhenotypeSimulator}
 
@@ -68,6 +75,7 @@ post=trans-la-tio-nal
 \input{Chapter4/Visualisation}
 \input{Chapter4/FeatureExtraction}
 
+
 \input{Chapter5/Intro}
 \input{Chapter5/Data}
 \input{Chapter5/DimensionalityReduction}
@@ -80,7 +88,6 @@ post=trans-la-tio-nal
 \input{Chapter6/Conclusion-FD}
 
 \input{Conclusion}
-
 
 \beginsupplement
 \input{Supplement/Supplement}
