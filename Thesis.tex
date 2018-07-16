@@ -1,6 +1,6 @@
 \documentclass{thesis}
 \input{mathcommands}
-\makeglossaries 
+\makeglossaries
 %\setabbreviationstyle{long-short-sc}% glossaries-extra.sty
 \loadglsentries{abbreviations.tex}
 
@@ -37,18 +37,20 @@ post=trans-la-tio-nal
 \cleardoublepage
 \input{frontpage}
 \cleardoublepage
+\input{Acknowledgements}
+\cleardoublepage
 \input{Declaration}
 \cleardoublepage
 
 \tableofcontents
 \addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
-\cleardoublepage
+=\cleardoublepage
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
 \cleardoublepage
-\addcontentsline{toc}{chapter}{List of Abbreviations}
-\printglossary[type=\acronymtype, title={List of Abbreviations}]
+%\addcontentsline{toc}{chapter}{List of Abbreviations}
+\printglossary[style = long, type=\acronymtype, title={List of Abbreviations}]
 \cleardoublepage
 \input{Summary}
 
